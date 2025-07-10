@@ -7,9 +7,9 @@ terraform {
     }
   }
 
-  backend "local" {} # Will change later if needed
+  backend "local" {} # Will change later if needed to s3
 }
 
 provider "aws" {
-  region = "eu-north-1"
+  region = var.region
 }
