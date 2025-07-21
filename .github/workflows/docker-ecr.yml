@@ -29,5 +29,5 @@ jobs:
         env:
           ECR_REGISTRY: 730335547532.dkr.ecr.eu-north-1.amazonaws.com/devops-kit-app
         run: |
-          docker build -t $ECR_REGISTRY:latest .
+          docker build -t $ECR_REGISTRY:latest ./app
           docker push $ECR_REGISTRY:latest
