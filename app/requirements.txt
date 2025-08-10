@@ -1,2 +1,4 @@
 flask
 gunicorn
+prometheus-flask-exporter
+prometheus_client
