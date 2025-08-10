@@ -7,11 +7,11 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: {{ .Values.service.port }} #80
+      targetPort: {{ .Values.service.targetPort }} #5000
       protocol: TCP
       name: http
-    - port: {{ .Values.service.metricsPort }}
+    - port: {{ .Values.service.metricsPort }} #5001
       targetPort: metrics
       protocol: TCP
       name: metrics
