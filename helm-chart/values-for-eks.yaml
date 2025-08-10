@@ -1,0 +1,75 @@
+#values for deployment to EKS 
+replicaCount: 4
+
+image:
+  repository: 730335547532.dkr.ecr.eu-north-1.amazonaws.com/devops-kit-app
+  pullPolicy: Always
+  tag: latest
+
+imagePullSecrets:
+  - name: ecr-secret
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5000
+  metricsPort: 5001
+
+ingress:
+  enabled: true
+  className: "alb"
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+  hosts:
+    - host: ""  # Empty host for catch-all
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+
+resources: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 5000
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 5000
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+volumes: []
+
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
